@@ -1,0 +1,30 @@
+import cv2
+import os
+
+# Obter o caminho da área de trabalho
+desktop_path = os.path.join(os.path.expanduser('~'), 'Desktop')
+
+# Caminho completo da imagem
+image_path = os.path.join(desktop_path, 'vasco.jpg')
+
+# Verificar se o arquivo existe
+if not os.path.exists(image_path):
+    print("A imagem 'vasco.jpg' não foi encontrada na área de trabalho.")
+else:
+    # Carregar a imagem colorida
+    image = cv2.imread(image_path)
+
+    # Converter para escala de cinza
+    gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+
+    # Aplicar a binarização
+    _, binary_image = cv2.threshold(gray_image, 127, 255, cv2.THRESH_BINARY)
+
+    # Mostrar as imagens
+    cv2.imshow('Imagem Colorida', image)
+    cv2.imshow('Imagem em Níveis de Cinza', gray_image)
+    cv2.imshow('Imagem Binarizada', binary_image)
+
+    # Aguardar pressionamento de tecla para fechar as janelas
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
